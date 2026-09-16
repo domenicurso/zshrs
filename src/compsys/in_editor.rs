@@ -361,6 +361,15 @@ fn bootstrap_shell() {
     }
 
     crate::ported::exec::install_session_executor(executor);
+    let fpath = crate::compsys::ported::compinit::get_system_fpath();
+    let init = crate::compsys::ported::compinit::compinit(&fpath);
+    tracing::info!(
+        target: "zshrs::compsys::in_editor",
+        dirs_scanned = init.dirs_scanned,
+        files_scanned = init.files_scanned,
+        scan_time_ms = init.scan_time_ms,
+        "completion state initialized",
+    );
     SHELL_READY.store(true, Ordering::SeqCst);
     tracing::info!(
         target: "zshrs::compsys::in_editor",
