@@ -128,6 +128,7 @@ pub mod bundled_functions;
 pub mod bash_complete;
 /// `canonical_apply` submodule.
 #[path = "extensions/canonical_apply.rs"]
+#[cfg(feature = "daemon")]
 pub mod canonical_apply;
 /// Shared-handle accessors for the completion match accumulators (Rust-original
 /// glue restoring C's `matches = mgroup->lmatches` pointer alias; see the module

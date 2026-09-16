@@ -158,7 +158,7 @@ libc = "0.2"
 indexmap = "2"
 parking_lot = "0.12"
 thiserror = "2"
-nix = { version = "0.29", features = ["signal", "process", "term", "fs"] }
+nix = { version = "0.29", features = ["signal", "process", "term", "fs", "feature"] }
 rusqlite = { version = "0.32", features = ["bundled"] }
 regex-lite = "0.1"
 dirs = "5"
@@ -211,6 +211,10 @@ base64 = { version = "0.22", optional = true }
 
 [features]
 default = ["daemon", "aot-hook"]
+# Keel embeds only the in-editor completion entry point. Keep the feature
+# explicit so downstreams cannot accidentally pull the daemon or shell
+# executable defaults into an editor binary.
+completion-only = []
 # `aot-hook` compiles `fusevm_aot_register_builtins` — the `#[no_mangle]` symbol
 # fusevm's AOT runtime resolves by name when it links a native binary against
 # `libzsh.a` (see src/extensions/aot.rs). ON by default so `zbuild --native`
