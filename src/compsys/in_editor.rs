@@ -363,6 +363,9 @@ fn bootstrap_shell() {
     crate::ported::exec::install_session_executor(executor);
     let fpath = crate::compsys::ported::compinit::get_system_fpath();
     let init = crate::compsys::ported::compinit::compinit(&fpath);
+    crate::compsys::ported::compinit::register_autoload_stubs(
+        crate::compsys::ported::compinit::autoload_stub_names(&init),
+    );
     tracing::info!(
         target: "zshrs::compsys::in_editor",
         dirs_scanned = init.dirs_scanned,
